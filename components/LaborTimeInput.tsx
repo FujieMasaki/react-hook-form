@@ -1,31 +1,26 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-
-enum GenderEnum {
-    female = 'female',
-    male = 'male',
-    other = 'other'
-}
-interface LaborTimeInput {
+interface IFormInput {
     firstName: String;
-    gender: GenderEnum;
+    lastName: string;
+    age: number;
 }
 export default function App() {
-    const { register, handleSubmit } = useForm<LaborTimeInput>();
-    const onSubmit: SubmitHandler<LaborTimeInput> = (data) => console.log(data);
+    const { register, handleSubmit } = useForm<IFormInput>();
+    const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <label>
-                First Name
-                <input {...register('firstName')} />
+                firstName
+                <input {...register('firstName', { required: true, maxLength: 20 })} />
             </label>
             <label>
-                Gender Selection
-                <select {...register('gender')}>
-                    <option value="female">female</option>
-                    <option value="male">male</option>
-                    <option value="other">other</option>
-                </select>
+                lastName
+                <input {...register('lastName', { pattern: /^[A-Za-z]+$/i })} />
+            </label>
+            <label>
+                age
+                <input type="number" {...register('age', { min: 18, max: 99 })} />
             </label>
             <input type="submit" />
         </form>

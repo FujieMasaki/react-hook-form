@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import LaborTimeInput from '../components/LaborTimeInput';
+import LaborTimeInput from '../components/RecordInput';
 import styles from '../styles/Home.module.css'
 
 
